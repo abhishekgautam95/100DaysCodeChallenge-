@@ -1,14 +1,14 @@
 // script.js
 
 // Countdown timer code 
-let newYearDate = new Date('14 August, 2024, 16:08:59');
+let newYearDate = new Date('14 August, 2024, 23:59:59');
 let currentDate = new Date();
 let milliDiff = newYearDate.getTime() - 
                     currentDate.getTime();
 let remDays=0, remHours=0, 
 remMinutes=0, remSeconds=0;
 const countDown = () => {
-    const newYearDate = new Date('14 August, 2024, 16:08:59');
+    const newYearDate = new Date('14 August, 2024, 23:59:59');
     const currentDate = new Date();
     const milliDiff = newYearDate.getTime() - 
                         currentDate.getTime();

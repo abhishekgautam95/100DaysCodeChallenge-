@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Flag</title>
+</head>
+<body>
+
+<canvas id="flagCanvas" width="600" height="400"></canvas>
+
+<script>
+    const canvas = document.getElementById('flagCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const flagWidth = 450;
+    const flagHeight = 300;
+    const stripeHeight = flagHeight / 3;
+
+    // Draw the orange stripe
+    ctx.fillStyle = '#FF9933';
+    ctx.fillRect(75, 50, flagWidth, stripeHeight);
+
+    // Draw the white stripe
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(75, 50 + stripeHeight, flagWidth, stripeHeight);
+
+    // Draw the green stripe
+    ctx.fillStyle = '#138808';
+    ctx.fillRect(75, 50 + 2 * stripeHeight, flagWidth, stripeHeight);
+
+    // Draw the Ashoka Chakra
+    const centerX = 75 + flagWidth / 2;
+    const centerY = 50 + stripeHeight * 1.5;
+    const chakraRadius = 50;
+
+    // Draw the outer circle
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, chakraRadius, 0, 2 * Math.PI);
+    ctx.strokeStyle = '#000080';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw the 24 spokes
+    for (let i = 0; i < 24; i++) {
+        const angle = (i * Math.PI * 2) / 24;
+        const x = centerX + chakraRadius * Math.cos(angle);
+        const y = centerY + chakraRadius * Math.sin(angle);
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+</script>
+
+</body>
+</html>

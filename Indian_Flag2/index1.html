@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waving Indian Flag with Stand</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="flagCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('flagCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const flagWidth = canvas.width * 0.6;
+        const flagHeight = canvas.height * 0.4;
+        const stripeHeight = flagHeight / 3;
+        const poleWidth = 20;
+        const poleHeight = canvas.height * 0.6;
+        const poleX = 30; // X-coordinate of the pole
+
+        // Function to draw a rectangle with specified color, x, y, width, and height
+        function drawRectangle(color, x, y, width, height) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+        }
+
+        // Function to draw the Ashoka Chakra
+        function drawChakra(x, y, radius) {
+            ctx.strokeStyle = 'navy';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+            for (let i = 0; i < 24; i++) {
+                const angle = i * (2 * Math.PI / 24);
+                const x1 = x + radius * Math.cos(angle);
+                const y1 = y - radius * Math.sin(angle);
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x1, y1);
+                ctx.stroke();
+            }
+        }
+
+        // Draw the flag with waving effect
+        function drawWavingFlag(offset) {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the flag pole
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(poleX, canvas.height - poleHeight, poleWidth, poleHeight);
+
+            // Draw the flag
+            const flagX = poleX + poleWidth; // Position flag to the right of the pole
+            const flagY = canvas.height - poleHeight; // Flag's top aligns with the pole
+
+            // Draw the saffron stripe
+            drawRectangle('orange', flagX, flagY, flagWidth, stripeHeight);
+
+            // Draw the white stripe with wave effect
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(flagX, flagY + stripeHeight);
+            for (let x = 0; x <= flagWidth; x++) {
+                const y = flagY + stripeHeight + 10 * Math.sin((x + offset) * 0.05);
+                ctx.lineTo(flagX + x, y);
+            }
+            ctx.lineTo(flagX + flagWidth, flagY + stripeHeight * 2);
+            ctx.lineTo(flagX, flagY + stripeHeight * 2);
+            ctx.closePath();
+            ctx.clip();
+            drawRectangle('white', flagX, flagY + stripeHeight, flagWidth, stripeHeight);
+
+            // Draw the green stripe with wave effect
+            ctx.restore();
+            drawRectangle('green', flagX, flagY + stripeHeight * 2, flagWidth, stripeHeight);
+
+            // Draw the Ashoka Chakra
+            const chakraRadius = 40;
+            const centerX = flagX + flagWidth / 2;
+            const centerY = flagY + stripeHeight + stripeHeight / 2 + 10 * Math.sin((offset + flagWidth / 2) * 0.05);
+            drawChakra(centerX, centerY, chakraRadius);
+        }
+
+        let offset = 0;
+        function animate() {
+            drawWavingFlag(offset);
+            offset += 5; // Adjust speed of waving
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

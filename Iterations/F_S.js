@@ -1,0 +1,102 @@
+//Use of filter & scope
+
+const Books = [
+  { title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', genre: 'History', Publish: 2011, edition: 2020, country: 'Israel' },
+  { title: 'The God of Small Things', author: 'Arundhati Roy', genre: 'Fiction', Publish: 1997, edition: 2017, country: 'India' },
+  { title: 'Midnight’s Children', author: 'Salman Rushdie', genre: 'Fiction', Publish: 1981, edition: 2013, country: 'India' },
+  { title: 'The White Tiger', author: 'Aravind Adiga', genre: 'Fiction', Publish: 2008, edition: 2017, country: 'India' },
+  { title: 'A Suitable Boy', author: 'Vikram Seth', genre: 'Fiction', Publish: 1993, edition: 2016, country: 'India' },
+  { title: 'The Immortals of Meluha', author: 'Amish Tripathi', genre: 'Mythology', Publish: 2010, edition: 2018, country: 'India' },
+  { title: 'The Discovery of India', author: 'Jawaharlal Nehru', genre: 'History', Publish: 1946, edition: 2004, country: 'India' },
+  { title: 'Train to Pakistan', author: 'Khushwant Singh', genre: 'Historical Fiction', Publish: 1956, edition: 2015, country: 'India' },
+  { title: 'The Argumentative Indian', author: 'Amartya Sen', genre: 'Essay', Publish: 2005, edition: 2012, country: 'India' },
+  { title: 'The Guide', author: 'R.K. Narayan', genre: 'Fiction', Publish: 1958, edition: 2010, country: 'India' },
+  { title: 'India After Gandhi', author: 'Ramachandra Guha', genre: 'History', Publish: 2007, edition: 2017, country: 'India' },
+  { title: 'The Palace of Illusions', author: 'Chitra Banerjee Divakaruni', genre: 'Mythology', Publish: 2008, edition: 2018, country: 'India' },
+  { title: 'The Great Indian Novel', author: 'Shashi Tharoor', genre: 'Satire', Publish: 1989, edition: 2015, country: 'India' },
+  { title: 'Malgudi Days', author: 'R.K. Narayan', genre: 'Short Stories', Publish: 1943, edition: 2010, country: 'India' },
+  { title: 'The Glass Palace', author: 'Amitav Ghosh', genre: 'Historical Fiction', Publish: 2000, edition: 2014, country: 'India' },
+  { title: 'Interpreter of Maladies', author: 'Jhumpa Lahiri', genre: 'Short Stories', Publish: 1999, edition: 2015, country: 'India/USA' },
+  { title: 'The Namesake', author: 'Jhumpa Lahiri', genre: 'Fiction', Publish: 2003, edition: 2015, country: 'India/USA' },
+  { title: 'The Lowland', author: 'Jhumpa Lahiri', genre: 'Fiction', Publish: 2013, edition: 2014, country: 'India/USA' },
+  { title: 'Five Point Someone', author: 'Chetan Bhagat', genre: 'Fiction', Publish: 2004, edition: 2014, country: 'India' },
+  { title: 'The Shadow Lines', author: 'Amitav Ghosh', genre: 'Fiction', Publish: 1988, edition: 2005, country: 'India' },
+  { title: 'The Inheritance of Loss', author: 'Kiran Desai', genre: 'Fiction', Publish: 2006, edition: 2007, country: 'India' },
+  { title: 'The Hungry Tide', author: 'Amitav Ghosh', genre: 'Fiction', Publish: 2004, edition: 2013, country: 'India' },
+  { title: 'The English Teacher', author: 'R.K. Narayan', genre: 'Fiction', Publish: 1945, edition: 2001, country: 'India' },
+  { title: 'The Blue Umbrella', author: 'Ruskin Bond', genre: 'Children\'s Literature', Publish: 1974, edition: 2010, country: 'India' },
+  { title: 'Gitanjali', author: 'Rabindranath Tagore', genre: 'Poetry', Publish: 1910, edition: 2012, country: 'India' },
+  { title: 'The Mahabharata', author: 'C. Rajagopalachari', genre: 'Mythology', Publish: 1958, edition: 2010, country: 'India' },
+  { title: 'The Ramayana', author: 'C. Rajagopalachari', genre: 'Mythology', Publish: 1957, edition: 2009, country: 'India' },
+  { title: 'A Fine Balance', author: 'Rohinton Mistry', genre: 'Fiction', Publish: 1995, edition: 2006, country: 'India' },
+  { title: 'Sacred Games', author: 'Vikram Chandra', genre: 'Crime Fiction', Publish: 2006, edition: 2010, country: 'India' },
+  { title: 'An Obedient Father', author: 'Akhil Sharma', genre: 'Fiction', Publish: 2000, edition: 2014, country: 'India/USA' },
+  { title: 'The Last Mughal', author: 'William Dalrymple', genre: 'History', Publish: 2006, edition: 2010, country: 'India/UK' },
+  { title: 'The Wonder That Was India', author: 'A.L. Basham', genre: 'History', Publish: 1954, edition: 2004, country: 'India/UK' },
+  { title: 'A Flight of Pigeons', author: 'Ruskin Bond', genre: 'Historical Fiction', Publish: 1978, edition: 2008, country: 'India' },
+  { title: 'A Bend in the Ganges', author: 'Manohar Malgonkar', genre: 'Historical Fiction', Publish: 1964, edition: 2009, country: 'India' },
+  { title: 'In Custody', author: 'Anita Desai', genre: 'Fiction', Publish: 1984, edition: 2007, country: 'India' },
+  { title: 'The Glassblower\'s Breath', author: 'Siddhartha Gigoo', genre: 'Fiction', Publish: 2015, edition: 2017, country: 'India' },
+  { title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', country: 'Israel', genre: 'History', Publish: 2011, edition: 2020 },
+  { title: 'The God of Small Things', author: 'Arundhati Roy', country: 'India', genre: 'Fiction', Publish: 1997, edition: 2017 },
+  { title: 'Midnight’s Children', author: 'Salman Rushdie', country: 'India', genre: 'Fiction', Publish: 1981, edition: 2013 },
+  { title: 'The White Tiger', author: 'Aravind Adiga', country: 'India', genre: 'Fiction', Publish: 2008, edition: 2017 },
+  { title: 'A Suitable Boy', author: 'Vikram Seth', country: 'India', genre: 'Fiction', Publish: 1993, edition: 2016 },
+  { title: 'The Immortals of Meluha', author: 'Amish Tripathi', country: 'India', genre: 'Mythology', Publish: 2010, edition: 2018 },
+  { title: 'The Discovery of India', author: 'Jawaharlal Nehru', country: 'India', genre: 'History', Publish: 1946, edition: 2004 },
+  { title: 'Train to Pakistan', author: 'Khushwant Singh', country: 'India', genre: 'Historical Fiction', Publish: 1956, edition: 2015 },
+  { title: 'The Argumentative Indian', author: 'Amartya Sen', country: 'India', genre: 'Essay', Publish: 2005, edition: 2012 },
+  { title: 'Wings of Fire', author: 'A.P.J. Abdul Kalam', country: 'India', genre: 'Autobiography', Publish: 1999, edition: 2014 },
+  { title: 'The Guide', author: 'R.K. Narayan', country: 'India', genre: 'Fiction', Publish: 1958, edition: 2010 },
+  { title: 'India After Gandhi', author: 'Ramachandra Guha', country: 'India', genre: 'History', Publish: 2007, edition: 2017 },
+  { title: 'The Palace of Illusions', author: 'Chitra Banerjee Divakaruni', country: 'India', genre: 'Mythology', Publish: 2008, edition: 2018 },
+  { title: 'The Great Indian Novel', author: 'Shashi Tharoor', country: 'India', genre: 'Satire', Publish: 1989, edition: 2015 },
+  { title: 'The Alchemist', author: 'Paulo Coelho', country: 'Brazil', genre: 'Fiction', Publish: 1988, edition: 2015 },
+  { title: 'Shantaram', author: 'Gregory David Roberts', country: 'Australia', genre: 'Fiction', Publish: 2003, edition: 2015 },
+  { title: 'Five Point Someone', author: 'Chetan Bhagat', country: 'India', genre: 'Fiction', Publish: 2004, edition: 2014 },
+  { title: 'Malgudi Days', author: 'R.K. Narayan', country: 'India', genre: 'Short Stories', Publish: 1943, edition: 2010 },
+  { title: 'The Glass Palace', author: 'Amitav Ghosh', country: 'India', genre: 'Historical Fiction', Publish: 2000, edition: 2014 },
+  { title: 'Interpreter of Maladies', author: 'Jhumpa Lahiri', country: 'United States', genre: 'Short Stories', Publish: 1999, edition: 2015 },
+  { title: 'The Namesake', author: 'Jhumpa Lahiri', country: 'United States', genre: 'Fiction', Publish: 2003, edition: 2015 },
+  { title: 'The Lowland', author: 'Jhumpa Lahiri', country: 'United States', genre: 'Fiction', Publish: 2013, edition: 2014 },
+  { title: 'The Kite Runner', author: 'Khaled Hosseini', country: 'Afghanistan', genre: 'Fiction', Publish: 2003, edition: 2013 },
+  { title: 'A Thousand Splendid Suns', author: 'Khaled Hosseini', country: 'Afghanistan', genre: 'Fiction', Publish: 2007, edition: 2014 },
+  { title: 'Half Girlfriend', author: 'Chetan Bhagat', country: 'India', genre: 'Romance', Publish: 2014, edition: 2015 },
+  { title: '2 States', author: 'Chetan Bhagat', country: 'India', genre: 'Romance', Publish: 2009, edition: 2015 },
+  { title: 'I Too Had a Love Story', author: 'Ravinder Singh', country: 'India', genre: 'Romance', Publish: 2008, edition: 2014 },
+  { title: 'You Are the Best Wife', author: 'Ajay K. Pandey', country: 'India', genre: 'Romance', Publish: 2015, edition: 2017 },
+  { title: 'The Monk Who Sold His Ferrari', author: 'Robin Sharma', country: 'Canada', genre: 'Self-help', Publish: 1997, edition: 2015 },
+  { title: 'The Secret', author: 'Rhonda Byrne', country: 'Australia', genre: 'Self-help', Publish: 2006, edition: 2014 },
+  { title: 'Rich Dad Poor Dad', author: 'Robert T. Kiyosaki', country: 'United States', genre: 'Self-help', Publish: 1997, edition: 2017 },
+  { title: 'Think and Grow Rich', author: 'Napoleon Hill', country: 'United States', genre: 'Self-help', Publish: 1937, edition: 2015 },
+  { title: 'How to Win Friends and Influence People', author: 'Dale Carnegie', country: 'United States', genre: 'Self-help', Publish: 1936, edition: 2017 },
+  { title: 'The Power of Habit', author: 'Charles Duhigg', country: 'United States', genre: 'Self-help', Publish: 2012, edition: 2014 },
+  { title: 'Atomic Habits', author: 'James Clear', country: 'United States', genre: 'Self-help', Publish: 2018, edition: 2020 },
+  { title: 'Ikigai', author: 'Héctor García and Francesc Miralles', country: 'Spain', genre: 'Self-help', Publish: 2016, edition: 2018 },
+  { title: 'The 7 Habits of Highly Effective People', author: 'Stephen R. Covey', country: 'United States', genre: 'Self-help', Publish: 1989, edition: 2017 },
+  { title: 'Quiet: The Power of Introverts', author: 'Susan Cain', country: 'United States', genre: 'Psychology', Publish: 2012, edition: 2013 },
+  { title: 'Man’s Search for Meaning', author: 'Viktor E. Frankl', country: 'Austria', genre: 'Psychology', Publish: 1946, edition: 2006 },
+  { title: 'The Diary of a Young Girl', author: 'Anne Frank', country: 'Netherlands', genre: 'Biography', Publish: 1947, edition: 2016 },
+  { title: 'Long Walk to Freedom', author: 'Nelson Mandela', country: 'South Africa', genre: 'Autobiography', Publish: 1994, edition: 2013 },
+  { title: 'Steve Jobs', author: 'Walter Isaacson', country: 'United States', genre: 'Biography', Publish: 2011, edition: 2015 },
+  { title: 'Elon Musk', author: 'Ashlee Vance', country: 'United States', genre: 'Biography', Publish: 2015, edition: 2017 },
+  { title: 'Becoming', author: 'Michelle Obama', country: 'United States', genre: 'Autobiography', Publish: 2018, edition: 2020 },
+  { title: 'Educated', author: 'Tara Westover', country: 'United States', genre: 'Memoir', Publish: 2018, edition: 2019 },
+  { title: 'The Subtle Art of Not Giving a F*ck', author: 'Mark Manson', country: 'United States', genre: 'Self-help', Publish: 2016, edition: 2017 },
+  { title: 'The Power of Now', author: 'Eckhart Tolle', country: 'Germany/Canada', genre: 'Spirituality', Publish: 1997, edition: 2014 },
+  { title: 'A Brief History of Time', author: 'Stephen Hawking', country: 'United Kingdom', genre: 'Science', Publish: 1988, edition: 2017}
+];
+  
+// let userbook =Books.filter((bk)=>bk.author==='A.P.J. Abdul Kalam')
+
+
+userbook =Books.filter((bk)=>{
+//    return bk.author==='A.P.J. Abdul Kalam'
+// return bk.genre==='Science'||bk.genre==='Spirituality'
+// return bk.genre==='Science'&& bk.country==='India'
+// return bk.country==='India'&& bk.genre==='Science'
+return bk.country==='United States'
+
+})
+console.log(userbook);
+

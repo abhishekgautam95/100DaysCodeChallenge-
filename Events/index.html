@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing Images</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="Greenry" src="photos/Greenry.jpg" alt="Greenry"></li>
+            <li><img width="200px" id="Flag_of_India" src="photos/Flag_of_India.svg.png" alt="Flag_of_India"></li>
+            <li><img width="200px" id="images" src="photos/images.jpeg" alt="images"></li>
+            <li><img width="200px" id="SSOC" src="photos/SSOC Badge.png" alt="SSOC"></li>
+            <li><img width="200px" id="sun" src="photos/sun.jpg" alt="sun"></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    
+    </div>
+</body>
+<script>
+    // document.getElementById('Greenry').onclick=function(){
+    //     alert("Greenry clicked")
+    // }
+    
+    // attachEvent()
+    // jQuery-on()
+
+    // document.getElementById('Greenry').addEventListener('click',function(){
+    //     alert("Greenry clicked already")
+    // })
+
+    //What can we find
+    //type,timestamp,defaultPrevented
+    //target,toElement,srcElement,currentTarget'
+    //clientX,clienty,screenX,screenY
+    //altkey,ctrlKey,shiftkey,keyCode
+
+    // document.getElementById('images').addEventListener('click',function(e){
+    //     console.log(e);
+    // },true)
+    
+
+
+    document.getElementById('images').addEventListener
+    ('click',function(e){
+    console.log(e);
+    },true)
+    
+    document.getElementById('images').addEventListener
+    ('click',function(e){
+        // e.preventDefault()
+        // e.stopPropagation()
+        console.log("Google Clicked");
+    },false)
+    
+    document.querySelector('#images').addEventListener
+    ('click',function(e){
+        console.log(e.target.parentNode);
+    })
+
+    document.querySelector('#images').addEventListener
+    ('click',function(e){
+        console.log(e.target.tagName);
+        if (e.target.tagName==='IMG') {
+            console.log(e.target.id)
+            let removeIt=e.target.parentNode
+            removeIt.remove()
+        }
+    })
+
+</script>
+</html>

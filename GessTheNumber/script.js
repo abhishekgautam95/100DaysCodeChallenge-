@@ -11,6 +11,7 @@ const p = document.createElement('p');
 
 let prevGuess = [];
 let numGuess = 1;
+const maxGuesses = 10;
 
 let playGame = true;
 
@@ -32,13 +33,12 @@ function validateGuess(guess) {
     alert('PLease enter a  number less than 100');
   } else {
     prevGuess.push(guess);
-    if (numGuess === 11) {
-      displayGuess(guess);
+    displayGuess(guess);
+    const isCorrectGuess = checkGuess(guess);
+
+    if (!isCorrectGuess && numGuess > maxGuesses) {
       displayMessage(`Game Over. Random number was ${randomNumber}`);
       endGame();
-    } else {
-      displayGuess(guess);
-      checkGuess(guess);
     }
   }
 }
@@ -47,18 +47,21 @@ function checkGuess(guess) {
   if (guess === randomNumber) {
     displayMessage(`You guessed it right`);
     endGame();
+    return true;
   } else if (guess < randomNumber) {
     displayMessage(`Number is TOOO low`);
   } else if (guess > randomNumber) {
     displayMessage(`Number is TOOO High`);
   }
+
+  return false;
 }
 
 function displayGuess(guess) {
   userInput.value = '';
   guessSlot.innerHTML += `${guess}, `;
   numGuess++;
-  remaining.innerHTML = `${11 - numGuess} `;
+  remaining.innerHTML = `${maxGuesses + 1 - numGuess} `;
 }
 
 function displayMessage(message) {
@@ -82,11 +85,10 @@ function newGame() {
     prevGuess = [];
     numGuess = 1;
     guessSlot.innerHTML = '';
-    remaining.innerHTML = `${11 - numGuess} `;
+    remaining.innerHTML = `${maxGuesses + 1 - numGuess} `;
     userInput.removeAttribute('disabled');
     startOver.removeChild(p);
 
     playGame = true;
   });
 }
-
